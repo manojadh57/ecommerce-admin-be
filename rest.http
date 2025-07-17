@@ -1,0 +1,71 @@
+@rootUrl = http://localhost:8000/api/admin/v1  
+
+### signuo
+POST {{rootUrl}}/auth/signup
+Content-Type: application/json
+
+{
+  "fName":   "manoj",
+  "lName":   "User",
+  "email":   "manoj@gamil.com",
+  "password": "Password123"
+}
+
+### verify the email
+
+GET {{rootUrl}}/auth/verify/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbm9qQGdhbWlsLmNvbSIsImlhdCI6MTc1MjcyODY2NiwiZXhwIjoxNzUyNzI5NTY2fQ.YDoQbWdIDhgo-E0-C8LrAYIcp1rXdi7kVYlck9v-EYs
+
+### LOGIN
+
+POST  {{rootUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email" :"manoj@gamil.com",
+    "password" : "Password123"
+}
+
+###create category
+
+POST http://localhost:8000/api/admin/v1/categories
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbm9qQGdhbWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MjcyOTgzMCwiZXhwIjoxNzUyODE2MjMwfQ.4DVczHis1rTEkF43ql7jOWk2gdiT00BpfEExO5GYShU
+
+{
+  "name": "Electrooo"
+}
+
+###List all the categories
+GET {{rootUrl}}/categories
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbm9qQGdhbWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MjcyOTgzMCwiZXhwIjoxNzUyODE2MjMwfQ.4DVczHis1rTEkF43ql7jOWk2gdiT00BpfEExO5GYShU
+
+###delete the categories
+DELETE {{rootUrl}}/categories/6876fd4751a0344d0fb9f068
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbm9qQGdhbWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MjcyOTgzMCwiZXhwIjoxNzUyODE2MjMwfQ.4DVczHis1rTEkF43ql7jOWk2gdiT00BpfEExO5GYShU
+
+
+###create a product
+POST {{rootUrl}}/products
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbm9qQGdhbWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MjczMTM3NSwiZXhwIjoxNzUyODE3Nzc1fQ.TQqXns5Zhy3-5QZXWoVTsvJHaGL-yH3SsjEgMTlQ7Wo
+
+{
+  "name": "ipad",
+  "description": "laptop",
+  "price": 29.99,
+  "stock": 100,
+  "category": "687888eeee54c11272fd9179",
+  "images": ["https://upload.wikimedia.org/wikipedia/commons/b/b2/MOUSE.jpg"]
+}
+
+### List Products
+GET http://localhost:8000/api/admin/v1/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbm9qQGdhbWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MjczMTM3NSwiZXhwIjoxNzUyODE3Nzc1fQ.TQqXns5Zhy3-5QZXWoVTsvJHaGL-yH3SsjEgMTlQ7Wo
+
+### Delete Product
+DELETE http://localhost:8000/api/admin/v1/products/68788f298530dda4e6cfd6fa
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbm9qQGdhbWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MjczMTM3NSwiZXhwIjoxNzUyODE3Nzc1fQ.TQqXns5Zhy3-5QZXWoVTsvJHaGL-yH3SsjEgMTlQ7Wo
+
+
+
