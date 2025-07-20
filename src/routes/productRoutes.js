@@ -9,6 +9,9 @@ import {
   deleteProduct,
 } from "../controllers/productController.js";
 
+import { validate } from "../middleware/validate.js";
+import { productSchema } from "../validators/productValidation.js";
+
 const router = express.Router();
 
 // Protect all routes
@@ -20,5 +23,8 @@ router.get("/", listProducts);
 router.get("/:id", getProductById);
 router.put("/:id", updateProduct);
 router.delete("/:id", deleteProduct);
+
+router.post("/", validate(productSchema), createProduct);
+router.put("/:id", validate(productSchema), updateProduct);
 
 export default router;

@@ -9,6 +9,7 @@ import router from "./src/routes/authRoutes.js";
 import categoryRouter from "./src/routes/categoryRoutes.js";
 import productRouter from "./src/routes/productRoutes.js";
 import orderRouter from "./src/routes/orderRoutes.js";
+import reviewRouter from "./src/routes/reviewRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -30,6 +31,9 @@ app.use("/api/admin/v1/products", productRouter);
 //order router
 
 app.use("/api/admin/v1/orders", orderRouter);
+
+//review routes//
+app.use("/api/admin/v1/reviews", reviewRouter);
 
 // health check
 app.get("/", (_, res) => res.json({ status: "OK", message: "Admin API" }));

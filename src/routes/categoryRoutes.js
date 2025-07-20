@@ -9,6 +9,9 @@ import {
   deleteCategory,
 } from "../controllers/categoryController.js";
 
+import { validate } from "../middleware/validate.js";
+import { categorySchema } from "../validators/categoryValidation.js";
+
 const router = express.Router();
 
 // Protect all category routes: valid token + admin role
@@ -26,5 +29,9 @@ router.put("/:id", updateCategory);
 
 // DELETE
 router.delete("/:id", deleteCategory);
+
+///joi validation//
+router.post("/", validate(categorySchema), createCategory);
+router.put("/:id", validate(categorySchema), updateCategory);
 
 export default router;
