@@ -1,8 +1,8 @@
-📦 eCommerce Admin Backend
+🛠️ eCommerce Admin Backend
 
-A Node/Express + MongoDB service that powers the Admin CMS of our MERN e‑commerce platform.  Sprint‑1 covers all core CRUD and moderation endpoints needed for the admin dashboard.
+MERN‑stack Admin API for our multi‑store e‑commerce project.  Covers authentication, product & category management, order processing, and review moderation.  This README reflects everything finished in Sprint 1.
 
-⚙️ Tech Stack
+🚀 Tech Stack
 
 Layer
 
@@ -10,39 +10,42 @@ Tech
 
 Runtime
 
-Node.js v18+ (ES Modules)
+Node v18+ (ES Modules)
 
 Framework
 
-Express 4
+Express 4
 
-DB
+Database
 
 MongoDB + Mongoose
 
 Auth
 
-JWT (access + refresh), bcrypt
+JWT (access + refresh), bcryptjs
 
 Validation
 
 Joi
 
-Security
+Logging / Security
 
-helmet, cors, morgan
+morgan · helmet · cors
 
-🚀 Quick Start
+⚡ Quick Start
 
 # 1. Clone & install
-$ git clone <repo‑url> && cd ecommerce-admin-be
-$ npm i
+git clone <repo-url> && cd ecommerce-admin-be
+npm i
 
-# 2. Configure env
-$ cp .env.example .env              # edit Mongo URI & JWT secrets
+# 2. Environment
+cp .env.example .env                  # add your secrets / Mongo URI
 
-# 3. Run dev server (nodemon)
-$ npm run dev                       # http://localhost:8000
+# 3. Seed first admin (if none exists)
+npm run seed:admin                    # creates admin@shop.com / Admin@123
+
+# 4. Dev server
+npm run dev                           # http://localhost:8000
 
 Seeded Admin Credentials
 
@@ -54,9 +57,39 @@ admin@shop.com
 
 Admin@123
 
-Use these to hit the login route and obtain your Bearer token.
+🔑 Environment Variables (.env)
 
-📑 API Reference (Sprint‑1)
+Key
+
+Example
+
+Description
+
+MONGO_URI
+
+mongodb://127.0.0.1:27017/ecomAdminDB
+
+Mongo connection string
+
+JWT_ACCESS_SECRET
+
+superSecretAccess123
+
+Signs 15‑min access tokens
+
+JWT_REFRESH_SECRET
+
+ultraSecretRefresh456
+
+Signs 30‑day refresh tokens
+
+CLIENT_URL
+
+http://localhost:5173
+
+Allowed CORS origin (admin frontend)
+
+📚 API Reference
 
 Auth
 
@@ -66,7 +99,9 @@ Path
 
 Body
 
-Notes
+Auth
+
+Description
 
 POST
 
@@ -74,7 +109,9 @@ POST
 
 { email, password }
 
-returns accessJWT, refreshJWT
+–
+
+Admin login, returns accessJWT & refreshJWT
 
 POST
 
@@ -82,7 +119,9 @@ POST
 
 { refreshJWT }
 
-new accessJWT
+–
+
+Renew access token
 
 Products (protected)
 
@@ -90,17 +129,17 @@ Method
 
 Path
 
-Body (✂️)
+Body
 
-Purpose
+Validation
 
 POST
 
 /products
 
-name, price, stock, category, …
+name, price, stock, category
 
-Create
+Joi (productSchema)
 
 GET
 
@@ -108,7 +147,7 @@ GET
 
 –
 
-List (pagination/search)
+Pagination & search via query params
 
 GET
 
@@ -116,15 +155,15 @@ GET
 
 –
 
-Single
+–
 
 PUT
 
 /products/:id
 
-full body
+same as POST
 
-Update
+Joi
 
 DELETE
 
@@ -132,74 +171,99 @@ DELETE
 
 –
 
-Remove
+–
 
-Categories (protected) – same verbs as Products.
+Categories (protected)
+
+Method
+
+Path
+
+Body
+
+POST
+
+/categories
+
+{ name }
+
+GET
+
+/categories
+
+–
+
+PUT
+
+/categories/:id
+
+{ name }
+
+DELETE
+
+/categories/:id
+
+–
 
 Orders (protected)
 
-| GET | /orders | – | List all |
-| PUT | /orders/:id/status | { status } | Update status & email notify |
+| GET | /orders | – | List all orders |
+| PUT | /orders/:id/status | { status } | Update (pending→shipped→delivered) |
 
 Reviews (protected)
 
-| PUT | /reviews/:id/approve | – | Approve |
-| DELETE | /reviews/:id | – | Remove + pull from product |
+| PUT | /reviews/:id/approve | – | Approve review |
+| DELETE | /reviews/:id | – | Remove review & pull from product |
 
-Auth header for all protected routes:
-Authorization: Bearer <accessJWT>
+Auth header: Authorization: Bearer <accessJWT> for all protected routes.
 
-🛡️ Validation & Error Shape
+🧰 Error Format
 
-All create/update routes are Joi‑validated.
+All errors funnel through a global handler:
 
-Errors funnel through a global handler:
+{
+  "status": "error",
+  "message": "Validation failed: \"price\" is required"
+}
 
-{ "status": "error", "message": "<details>" }
+🗄️ Folder Structure
 
-📂 Project Structure
+src/
+ ├─ config/            # Mongo connection
+ ├─ controllers/       # Business logic
+ ├─ middleware/        # auth, role, validate, errorHandler
+ ├─ models/            # Mongoose schemas & model helpers
+ ├─ routes/            # Express routers
+ ├─ utils/             # jwtHelper, bcrypt helpers
+ └─ validators/        # Joi schemas
 
-│  server.js
-│  .env.example
-└─ src/
-   ├─ config/         # Mongo connection
-   ├─ controllers/    # Route logic (auth, product, …)
-   ├─ middleware/     # auth, role, validate, errorHandler
-   ├─ models/         # Mongoose schemas & helpers
-   ├─ routes/         # Express routers per module
-   └─ utils/          # JWT & bcrypt helpers
+🧪 Manual Testing
 
-🧪 Testing
+Open rest.http (VS Code REST Client) and send:
 
-Manual smoke‑tests live in rest.http (VS Code REST Client).  Automated Jest/Supertest suite to be added in Sprint‑2.
+Admin login – grabs token.
 
-🛠️  Useful NPM Scripts
+Create category / product – validates Joi.
 
-Script
+Approve / delete review – confirms moderation.
 
-Purpose
+All endpoints return 2xx on success, 400 on validation errors, 401/403 on auth issues.
 
-npm run dev
+🛡️ Roadmap
 
-Dev server with Nodemon
+✅ Sprint 1: Auth, CRUD, validation, review moderation.
 
-npm test
+🔜 Sprint 2: Admin React Dashboard (sidebar, metrics, tables).
 
-Jest test runner (coming soon)
+🔜 Sprint 3: Email notifications & deployment (AWS EB & S3).
 
-npm run seed:admin
+👥 Authors
 
-(if enabled) insert first admin user
+Manoj Adhikari & Team (Backend)
 
-✨ Contributing
+Manas (AI Pair‑Programmer)
 
-Create a feature branch → git checkout -b feat/<name>
+🪪 License
 
-Commit using semantic messages.
-
-Submit PR; CI must pass.
-
-📜 License
-
-MIT © 2025 Manoj Adhikari & team
+MIT – see LICENSE.
 
