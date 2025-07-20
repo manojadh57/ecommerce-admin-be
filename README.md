@@ -152,4 +152,4 @@ All endpoints return **2xx** on success, **400** on validation errors, **401/403
 
 ## 🪪 License
 
-MIT – see `LICENSE`.
+
