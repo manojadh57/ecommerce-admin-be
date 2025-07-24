@@ -10,6 +10,7 @@ import categoryRouter from "./src/routes/categoryRoutes.js";
 import productRouter from "./src/routes/productRoutes.js";
 import orderRouter from "./src/routes/orderRoutes.js";
 import reviewRouter from "./src/routes/reviewRoutes.js";
+import { errorHandler } from "./src/middleware/errorhandler.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -17,6 +18,9 @@ const PORT = process.env.PORT || 8000;
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
+
+// static serve
+app.use("/assets", express.static("assets"));
 
 // routes
 app.use("/api/admin/v1/auth", router);
@@ -37,6 +41,9 @@ app.use("/api/admin/v1/reviews", reviewRouter);
 
 // health check
 app.get("/", (_, res) => res.json({ status: "OK", message: "Admin API" }));
+
+//error handler//
+app.use(errorHandler);
 
 // boot
 (async () => {

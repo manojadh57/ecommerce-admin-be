@@ -2,6 +2,10 @@ import Product from "../models/product/ProductSchema.js";
 
 export const createProduct = async (req, res) => {
   try {
+    // req.file
+    // req.body.image = [req.file]
+    console.log(req.file);
+    req.body.images = [req.file.path];
     const prod = await Product.create(req.body);
     return res.status(201).json(prod);
   } catch (err) {
@@ -22,6 +26,9 @@ export const getProductById = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   try {
+    if (req.file) {
+      req.body.images = [req.file.path];
+    }
     const prod = await Product.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
