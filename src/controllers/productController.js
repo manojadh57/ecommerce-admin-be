@@ -1,4 +1,5 @@
 import Product from "../models/product/ProductSchema.js";
+import { Types } from "mongoose"; ///for object id//
 
 export const createProduct = async (req, res) => {
   try {
@@ -14,8 +15,22 @@ export const createProduct = async (req, res) => {
 };
 
 export const listProducts = async (req, res) => {
-  const products = await Product.find().populate("category");
-  return res.json(products);
+  try {
+    const filter = {};
+
+    /// products?category=<id>
+    if (req.query.category) {
+      // Cast to ObjectId if your schema uses ObjectId
+      filter.category = new Types.ObjectId(req.query.category);
+      // If your Product schema stores the ID as a string, use:
+      // filter.category = req.query.category;
+    }
+
+    const products = await Product.find(filter).populate("category", "name");
+    return res.json(products); // plain array
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
 };
 
 export const getProductById = async (req, res) => {

@@ -16,16 +16,12 @@ import { upload } from "../utils/multerConfig.js";
 
 const router = express.Router();
 
-/* ───────── Protect all routes ───────── */
 router.use(adminAuth, ensureAdmin);
-
-/* ───────── CRUD ───────── */
-/*  NOTE: order = upload ▸ validate ▸ controller  */
 
 router.post(
   "/",
-  upload.single("image"), // <── Multer parses form-data
-  validate(productSchema), // <── Joi checks req.body
+  upload.single("image"),
+  validate(productSchema),
   createProduct
 );
 
