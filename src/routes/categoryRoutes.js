@@ -7,6 +7,8 @@ import {
   getCategoryById,
   updateCategory,
   deleteCategory,
+  listSubCategories,
+  listProductsByCategory,
 } from "../controllers/categoryController.js";
 
 import { validate } from "../middleware/validate.js";
@@ -33,5 +35,11 @@ router.delete("/:id", deleteCategory);
 ///joi validation//
 router.post("/", validate(categorySchema), createCategory);
 router.put("/:id", validate(categorySchema), updateCategory);
+
+// get category products
+router.get("/:id/products", listProductsByCategory);
+
+//sub catefories parents//
+router.get("/parent/:parentId", listSubCategories);
 
 export default router;

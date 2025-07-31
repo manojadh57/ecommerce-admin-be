@@ -29,7 +29,7 @@ Content-Type: application/json
 
 POST http://localhost:8000/api/admin/v1/categories
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUyOTgxODU1LCJleHAiOjE3NTMwNjgyNTV9.8xaufY-fk2yPohnsg93HJuzhQohmyZ_yXG_JVFjMELM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUzOTI2NDY2LCJleHAiOjE3NTQwMTI4NjZ9.LUjDILQw0rUMo2vTrqTNbrx3QWjFZIxaYjdOnq5e4F0
 
 {
   "name": "lectrooo"
@@ -38,7 +38,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ
 ###List all the categories
 GET {{rootUrl}}/categories
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbm9qQGdhbWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MjcyOTgzMCwiZXhwIjoxNzUyODE2MjMwfQ.4DVczHis1rTEkF43ql7jOWk2gdiT00BpfEExO5GYShU
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUzOTI2NDY2LCJleHAiOjE3NTQwMTI4NjZ9.LUjDILQw0rUMo2vTrqTNbrx3QWjFZIxaYjdOnq5e4F0
+
+### List products of category
+GET {{rootUrl}}/categories/688ac6f131542a1bfd91f8c7/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUzOTI2NDY2LCJleHAiOjE3NTQwMTI4NjZ9.LUjDILQw0rUMo2vTrqTNbrx3QWjFZIxaYjdOnq5e4F0
 
 ###delete the categories
 DELETE {{rootUrl}}/categories/6876fd4751a0344d0fb9f068

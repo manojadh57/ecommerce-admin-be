@@ -1,4 +1,5 @@
 import Category from "../models/category/CategorySchema.js";
+import Product from "../models/product/ProductSchema.js";
 
 export const createCategory = async (req, res) => {
   try {
@@ -56,4 +57,34 @@ export const deleteCategory = async (req, res) => {
   const cat = await Category.findByIdAndDelete(req.params.id);
   if (!cat) return res.status(404).json({ message: "Category not found" });
   return res.status(204).end();
+};
+
+export const listSubCategories = async (req, res) => {
+  try {
+    const subs = await Category.find({ parent: req.params.parentId });
+    return res.json(subs);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+export const listProductsByCategory = async (req, res) => {
+  try {
+    let id = req.params.id;
+
+    let products = await Product.find({ category: id });
+
+    let subCategories = await Category.find({ parent: id });
+
+    for (let i = 0; i < subCategories.length; i++) {
+      let subProducts = await Product.find({ category: subCategories[i]._id });
+      products = [...products, ...subProducts];
+    }
+
+    return res.json({
+      products,
+    });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
 };
