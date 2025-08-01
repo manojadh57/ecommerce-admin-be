@@ -27,20 +27,12 @@ npm i
 # 2. Environment
 cp .env.example .env                  # add your secrets / Mongo URI
 
-# 3. Seed first admin (if none exists)
-npm run seed:admin                    # creates admin@shop.com / Admin@123
 
 # 4. Dev server
 npm run dev                           # http://localhost:8000
 ```
 
-### Seeded Admin Credentials
 
-| Email                                   | Password   |
-| --------------------------------------- | ---------- |
-| [admin@shop.com](mailto:admin@shop.com) | Admin\@123 |
-
----
 
 ## 🔑 Environment Variables (`.env`)
 
@@ -146,7 +138,7 @@ All endpoints return **2xx** on success, **400** on validation errors, **401/403
 ## 👥 Authors
 
 * Manoj Adhikari & Team (Backend)
-* Manas (AI Pair‑Programmer)
+
 
 ---
 
