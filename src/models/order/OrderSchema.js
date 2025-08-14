@@ -4,7 +4,7 @@ const orderSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "AdminUser", // match your AdminUser model name
+      ref: "User", // match your User model name
       required: true,
     },
     products: [

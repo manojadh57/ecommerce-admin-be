@@ -10,6 +10,7 @@ import categoryRouter from "./src/routes/categoryRoutes.js";
 import productRouter from "./src/routes/productRoutes.js";
 import orderRouter from "./src/routes/orderRoutes.js";
 import reviewRouter from "./src/routes/reviewRoutes.js";
+import userRouter from "./src/routes/userRoutes.js";
 import { errorHandler } from "./src/middleware/errorhandler.js";
 
 const app = express();
@@ -35,6 +36,10 @@ app.use("/api/admin/v1/products", productRouter);
 //order router
 
 app.use("/api/admin/v1/orders", orderRouter);
+
+//user routes
+
+app.use("/api/admin/v1/users", userRouter);
 
 //review routes//
 app.use("/api/admin/v1/reviews", reviewRouter);

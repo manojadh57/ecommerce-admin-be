@@ -1,48 +1,32 @@
 import mongoose from "mongoose";
 import Review from "../models/review/ReviewSchema.js";
-import Product from "../models/product/ProductSchema.js";
+import "../models/user/CustomerUserModel.js"; // registers model "User"
 
-// Approve a review
-export const approveReview = async (req, res, next) => {
-  const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(400).json({ message: "Invalid review ID" });
-
-  try {
-    const review = await Review.findById(id);
-    if (!review) return res.status(404).json({ message: "Review not found" });
-
-    review.approved = true;
-    await review.save();
-
-    // Also add to product.reviews if not already there
-    await Product.findByIdAndUpdate(review.productId, {
-      $addToSet: { reviews: review._id },
-    });
-
-    return res.status(200).json({ message: "Review approved", review });
-  } catch (err) {
-    next(err);
-  }
+export const listReviews = async (_req, res) => {
+  const reviews = await Review.find({})
+    .populate("productId", "name title images")
+    .populate("userId", "email");
+  res.json(reviews);
 };
 
-// Delete a review
-export const deleteReview = async (req, res, next) => {
+export const setReviewApproval = async (req, res) => {
   const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(400).json({ message: "Invalid review ID" });
+  if (!mongoose.isValidObjectId(id))
+    return res.status(400).json({ message: "Invalid review id" });
 
-  try {
-    const review = await Review.findByIdAndDelete(id);
-    if (!review) return res.status(404).json({ message: "Review not found" });
+  const approved =
+    typeof req.body?.approved === "boolean" ? req.body.approved : true;
+  const r = await Review.findByIdAndUpdate(id, { approved }, { new: true });
+  if (!r) return res.status(404).json({ message: "Review not found" });
+  res.json(r);
+};
 
-    // Remove reference from product
-    await Product.findByIdAndUpdate(review.productId, {
-      $pull: { reviews: review._id },
-    });
+export const deleteReview = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.isValidObjectId(id))
+    return res.status(400).json({ message: "Invalid review id" });
 
-    return res.status(200).json({ message: "Review deleted" });
-  } catch (err) {
-    next(err);
-  }
+  const r = await Review.findByIdAndDelete(id);
+  if (!r) return res.status(404).json({ message: "Review not found" });
+  res.json({ message: "Review deleted" });
 };

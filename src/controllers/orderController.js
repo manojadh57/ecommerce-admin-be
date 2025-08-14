@@ -8,7 +8,7 @@ import Order from "../models/order/OrderSchema.js";
  */
 export const listOrders = async (req, res) => {
   const orders = await Order.find()
-    .populate("userId", "email fName lName")
+    .populate("userId", "email")
     .populate("products.productId", "name price");
   return res.json({ status: "success", orders });
 };
@@ -33,12 +33,12 @@ export const updateOrderStatus = async (req, res) => {
     }
 
     // send status update email
-    await sendOrderStatusEmail({
-      to: order.userId.email,
-      name: order.userId.fName,
-      orderId: order._id,
-      status: order.status,
-    });
+    // await sendOrderStatusEmail({
+    //   to: order.userId.email,
+    //   name: order.userId.fName,
+    //   orderId: order._id,
+    //   status: order.status,
+    // });
 
     return res.json({ status: "success", order });
   } catch (err) {

@@ -5,16 +5,15 @@ POST {{rootUrl}}/auth/signup
 Content-Type: application/json
 
 {
-  "fName":   "test",
-  "lName":   "test",
-  "email":   "test@gmail.com",
+  "fName":   "admin",
+  "lName":   "admin",
+  "email":   "admin@gmail.com",
   "password": "123"
 }
 
 ### verify the email
 
-GET {{rootUrl}}/auth/verify/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNzUyOTgwNzIwLCJleHAiOjE3NTI5ODE2MjB9.h5w3nnL0MpfIlTO4BCMBSbGov2qaeKhAhrcZQIPTAPs
-
+GET {{rootUrl}}/auth/verify/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTc1NDc5NzU2NCwiZXhwIjoxNzU0Nzk4NDY0fQ.xtaK7uvK4h4tC8jZ-FIZetkGu0k1nq7c3v7ubRlUuYc
 ### LOGIN
 
 POST  {{rootUrl}}/auth/login
@@ -41,7 +40,7 @@ Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUzOTI2NDY2LCJleHAiOjE3NTQwMTI4NjZ9.LUjDILQw0rUMo2vTrqTNbrx3QWjFZIxaYjdOnq5e4F0
 
 ### List products of category
-GET {{rootUrl}}/categories/688ac6f131542a1bfd91f8c7/products
+GET {{rootUrl}}/categories/688acc1d1470c8579905f85c/products
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUzOTI2NDY2LCJleHAiOjE3NTQwMTI4NjZ9.LUjDILQw0rUMo2vTrqTNbrx3QWjFZIxaYjdOnq5e4F0
 
 ###delete the categories

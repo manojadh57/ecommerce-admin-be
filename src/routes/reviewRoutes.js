@@ -1,21 +1,18 @@
 import express from "express";
 import { adminAuth } from "../middleware/authMiddleware.js";
-import { ensureAdmin } from "../middleware/roleMiddleware.js";
+import { ensureAdmin } from "../middleware/roleMiddleware.js"; // ← change to roleMiddleware
 
 import {
-  approveReview,
+  listReviews,
+  setReviewApproval,
   deleteReview,
 } from "../controllers/reviewController.js";
 
 const router = express.Router();
-
-// protect everything
 router.use(adminAuth, ensureAdmin);
 
-// PUT  /api/admin/v1/reviews/:id/approve
-router.put("/:id/approve", approveReview);
-
-// DELETE /api/admin/v1/reviews/:id
+router.get("/", listReviews);
+router.put("/:id/approve", setReviewApproval); // body.approved true|false (default true)
 router.delete("/:id", deleteReview);
 
 export default router;
