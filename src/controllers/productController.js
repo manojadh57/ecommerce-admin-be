@@ -2,7 +2,7 @@ import path from "path";
 import Product from "../models/product/ProductSchema.js";
 import Category from "../models/category/CategorySchema.js";
 
-// ---- helpers ----
+
 const toWebAssetPath = (p) => {
   // Accept anything (full disk path, "assets/...", "/assets/..."), return "assets/<file>"
   if (!p) return "";
