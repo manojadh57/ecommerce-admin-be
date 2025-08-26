@@ -2,7 +2,6 @@ import path from "path";
 import Product from "../models/product/ProductSchema.js";
 import Category from "../models/category/CategorySchema.js";
 
-
 const toWebAssetPath = (p) => {
   // Accept anything (full disk path, "assets/...", "/assets/..."), return "assets/<file>"
   if (!p) return "";
@@ -13,7 +12,7 @@ const toWebAssetPath = (p) => {
   return `assets/${path.basename(p)}`;
 };
 
-// ---- controllers ----
+// controllers
 export const createProduct = async (req, res) => {
   try {
     const payload = { ...req.body };
