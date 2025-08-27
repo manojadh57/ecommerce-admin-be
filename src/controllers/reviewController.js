@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import Review from "../models/review/ReviewSchema.js";
-import "../models/user/CustomerUserModel.js"; // registers model "User"
+import "../models/user/CustomerUserModel.js";
 
 export const listReviews = async (_req, res) => {
   const reviews = await Review.find({})

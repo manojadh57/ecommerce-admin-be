@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 /**
- * Joi wrapper – use as `validate(schema)` in routes
+ * Joi wrapper – use as validate(schema)
  */
 export const validate = (schema) => (req, res, next) => {
   const { error } = schema.validate(req.body, { abortEarly: false });

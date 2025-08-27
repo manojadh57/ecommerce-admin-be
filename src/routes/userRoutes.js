@@ -11,7 +11,7 @@ const router = express.Router();
 router.use(adminAuth, ensureAdmin);
 
 router.get("/", listUsers);
-router.put("/:id/active", setUserActive); // body: { active: true|false }
+router.put("/:id/active", setUserActive);
 router.delete("/:id", deleteUser);
 
 export default router;

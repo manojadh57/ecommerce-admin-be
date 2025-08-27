@@ -11,10 +11,7 @@ import {
 import { hashPassword, comparePassword } from "../utils/bcrypt.js";
 import { sendVerificationEmail } from "../helpers/emailHelper.js";
 
-/**
- * SIGN-UP
- * POST /api/admin/v1/auth/signup
- */
+//sign u
 export const signup = async (req, res) => {
   try {
     const { fName, lName, email, password } = req.body;

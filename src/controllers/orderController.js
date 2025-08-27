@@ -1,8 +1,7 @@
-// import AdminUser from "../models/user/UserSchema.js"; // removed (unused)
 import { sendOrderStatusEmail } from "../helpers/emailHelper.js";
 import Order from "../models/order/OrderSchema.js";
 
-/* ---------- helpers ---------- */
+//helper//
 const normalizeAddress = (a = {}) => ({
   name: a.name || "",
   phone: a.phone || "",
@@ -76,8 +75,6 @@ export const getOrderDetail = async (req, res) => {
 
 /**
  * PUT /api/admin/v1/orders/:id/status
- * Body: { status, notify?: boolean, note?: string }
- * Update an order’s status and (optionally) notify the customer via email.
  */
 export const updateOrderStatus = async (req, res) => {
   try {
@@ -105,17 +102,14 @@ export const updateOrderStatus = async (req, res) => {
       nextMap[current] &&
       !nextMap[current].includes(status)
     ) {
-      return res
-        .status(400)
-        .json({
-          status: "error",
-          message: `Cannot change status from "${current}" to "${status}"`,
-        });
+      return res.status(400).json({
+        status: "error",
+        message: `Cannot change status from "${current}" to "${status}"`,
+      });
     }
 
     orderDoc.status = status;
 
-    // optional timeline (if schema has it)
     if (Array.isArray(orderDoc.timeline)) {
       orderDoc.timeline.push({
         at: new Date(),

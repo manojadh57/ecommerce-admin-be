@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// Map to the shared "users" collection used by the customer app
 const customerUserSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, index: 1 },
@@ -8,7 +7,7 @@ const customerUserSchema = new mongoose.Schema(
     role: { type: String, default: "customer" },
     image: String,
     verified: { type: Boolean, default: false },
-    active: { type: Boolean, default: true }, // <-- for deactivate/activate
+    active: { type: Boolean, default: true }, // for deactivate/activate
   },
   { timestamps: true, collection: "users" }
 );
