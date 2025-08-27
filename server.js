@@ -11,7 +11,7 @@ import productRouter from "./src/routes/productRoutes.js";
 import orderRouter from "./src/routes/orderRoutes.js";
 import reviewRouter from "./src/routes/reviewRoutes.js";
 import userRouter from "./src/routes/userRoutes.js";
-import { errorHandler } from "./src/middleware/errorhandler.js";
+import { errorHandler } from "./src/middleware/errorHandler.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
